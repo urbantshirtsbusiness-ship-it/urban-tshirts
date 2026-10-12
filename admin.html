@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>URBAN T-SHIRTS — Product Manager</title><link rel="stylesheet" href="admin.css"></head>
+<body>
+<div id="adminLock" class="admin-lock">
+  <div class="lock-card">
+    <img src="assets/logo.png" alt="URBAN T-SHIRTS" class="lock-logo">
+    <p class="kicker">PRIVATE ACCESS</p>
+    <h2>Product Manager</h2>
+    <p class="help">This area is restricted to the store owner.</p>
+    <form id="adminLoginForm">
+      <label>Admin password<input id="adminPassword" type="password" autocomplete="current-password" required autofocus></label>
+      <button class="primary" type="submit">Unlock Product Manager</button>
+      <p id="loginError" class="login-error" hidden>Incorrect password. Try again.</p>
+    </form>
+  </div>
+</div>
+<div id="adminApp">
+<header><a href="index.html">← View Store</a><h1>URBAN T-SHIRTS <span>PRODUCT MANAGER</span></h1><button id="themeToggle" type="button">☾ Theme</button><button onclick="resetProducts()">Reset Demo Products</button></header>
+<main>
+<section class="panel">
+<p class="kicker">VERSION 4 • PRIVATE ADMIN</p><h2>Add / edit collection</h2>
+<p class="help">This page is for managing the products shown on the store. Changes are saved in this browser using localStorage.</p>
+<form id="form">
+<input type="hidden" id="id">
+<label>Product name<input id="name" required placeholder="e.g. Itachi Oversized Tee"></label>
+<div class="two"><label>Price (₹)<input id="price" type="number" min="0" value="199" required></label><label>Category<select id="category"><option>Anime</option><option>Graphic</option><option>Streetwear</option><option>Trendy</option></select></label></div>
+<label>Photo path<input id="image" required placeholder="assets/my-tshirt.jpg"></label>
+<label>Sizes <input id="sizes" value="M,L,XL"></label>
+<label>Badge<select id="badge"><option value="">None</option><option>NEW</option><option>BESTSELLER</option><option>HOT</option><option>TRENDING</option><option>SALE</option></select></label>
+<div class="actions"><button class="primary" type="submit">Save product</button><button type="button" onclick="clearForm()">Clear</button></div>
+</form>
+</section>
+<section class="panel"><div class="list-head"><div><p class="kicker">YOUR COLLECTION</p><h2>Products</h2></div><input id="filter" placeholder="Search products…"></div><div id="list"></div></section>
+<section class="panel tip"><h3>How to update the website</h3><ol><li>Put a new product photo inside the <b>assets</b> folder.</li><li>Enter its path, for example <b>assets/new-tee.jpg</b>.</li><li>Add the product name, price, category and sizes, then click <b>Save product</b>.</li><li>Open <b>index.html</b> to see the updated collection.</li></ol><p><b>Important:</b> This version is a front-end store. The manager saves changes only in the browser/device where you edit it. For a real online shop where you can manage products from any phone, the next step is to connect a database/admin backend.</p></section>
+</main>
+<footer class="admin-footer"><button type="button" id="logoutBtn">Lock Product Manager</button></footer>
+</div>
+<script src="admin.js"></script>
+</body></html>

@@ -1,0 +1,9 @@
+# Operating System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Vercel & environment
+.vercel
+.cache
+*.log

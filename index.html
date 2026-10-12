@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>URBAN T-SHIRTS — Trendy • Comfy • Affordable</title>
+<meta name="description" content="Shop premium printed oversized tees from URBAN T-SHIRTS. ₹199 each or 3 for ₹499.">
+<link rel="icon" href="assets/logo.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="announcement">🚚 Delivery in 3–4 days <span>•</span> 3 TEES FOR ₹499 <span>•</span> Return available only for damaged pieces</div>
+
+<header class="header">
+  <a href="#" class="brand">
+    <img src="assets/logo.png" alt="URBAN T-SHIRTS logo">
+    <div><strong>URBAN T-SHIRTS</strong><small>TRENDY • COMFY • AFFORDABLE</small></div>
+  </a>
+  <nav>
+    <a href="#shop">Men</a><a href="#shop">New Arrivals</a><a href="#shop">Anime</a><a href="#shop">Streetwear</a>
+  </nav>
+  <div class="header-tools">
+    <label class="search"><span>⌕</span><input id="search" placeholder="Search for products, brands and more"></label>
+    <button class="tool" id="themeToggle" title="Toggle dark theme" aria-label="Toggle dark theme">☾</button><button class="tool" id="wishlistBtn" title="Wishlist" aria-label="Wishlist">♡ <b id="wishlistCount">0</b></button>
+    <button class="tool cart-button" onclick="openCart()">🛒 <b id="cartCount">0</b></button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-copy">
+    <p class="kicker">URBAN DROP 01</p>
+    <h1>WEAR YOUR<br><em>VIBE.</em></h1>
+    <p class="hero-text">Premium printed oversized tees made for everyday streetwear. Fresh graphics, easy comfort and prices that make sense.</p>
+    <div class="hero-actions"><button class="black-btn" onclick="scrollShop()">SHOP NOW <span>→</span></button><a href="#combo" class="text-link">View combo offer</a></div>
+    <div class="hero-note"><b>₹199</b> per tee &nbsp;|&nbsp; <b>₹499</b> 3-piece combo</div>
+  </div>
+  <div class="hero-art">
+    <div class="hero-image-wrap"><img src="assets/goku.jpg" alt="URBAN T-SHIRTS featured tee"></div>
+    <div class="floating-card"><small>BEST VALUE</small><strong>3 FOR ₹499</strong><span>Pick any 3 styles</span></div>
+  </div>
+</section>
+
+<div class="benefit-row">
+  <div><b>₹199</b><span>Single tee</span></div><div><b>3 FOR ₹499</b><span>Combo offer</span></div><div><b>3–4 DAYS</b><span>Delivery</span></div><div><b>QUALITY</b><span>Comfort-first</span></div>
+</div>
+
+<main id="shop">
+<section class="shop">
+  <div class="shop-heading">
+    <div><p class="kicker">SHOP BY STYLE</p><h2>Trending now</h2></div>
+    <select id="sort"><option value="featured">Sort: Featured</option><option value="low">Price: Low to High</option><option value="high">Price: High to Low</option></select>
+  </div>
+  <div class="chips" id="chips">
+    <button class="chip active" data-cat="All">All</button>
+    <button class="chip" data-cat="Anime">Anime</button>
+    <button class="chip" data-cat="Graphic">Graphic</button>
+    <button class="chip" data-cat="Streetwear">Streetwear</button>
+  </div>
+  <div class="grid" id="productGrid"></div>
+</section>
+
+<section class="combo" id="combo">
+  <div><p class="kicker">SAVE MORE</p><h2>Pick 3. Pay ₹499.</h2><p>Select any 3 tees, choose M, L or XL for each, and pay one simple combo price of ₹499.</p></div>
+  <button class="black-btn" id="comboButton" onclick="addCombo()" disabled>SELECT 3 TEES (0/3) →</button>
+</section>
+
+<section class="trust">
+  <div><span>✓</span><div><b>Premium printed tees</b><small>Made for everyday comfort</small></div></div>
+  <div><span>✓</span><div><b>Simple pricing</b><small>₹199 single / ₹499 combo</small></div></div>
+  <div><span>✓</span><div><b>Fast delivery</b><small>3–4 days</small></div></div>
+  <div><span>✓</span><div><b>Damaged-piece support</b><small>Return available for damaged pieces</small></div></div>
+</section>
+
+<section class="about" id="about">
+  <div><p class="kicker">ABOUT THE BRAND</p><h2>Streetwear without the overpricing.</h2></div>
+  <p>URBAN T-SHIRTS brings bold printed designs, comfortable fits and affordable everyday fashion. Choose your graphic, choose your size and order directly on WhatsApp.</p>
+</section>
+</main>
+
+<footer id="contact">
+  <div class="footer-main">
+    <div class="footer-brand"><img src="assets/logo.png"><div><b>URBAN T-SHIRTS</b><small>TRENDY • COMFY • AFFORDABLE</small></div></div>
+    <div><h4>Customer care</h4><a href="https://wa.me/917603871293">WhatsApp: 7603871293</a><a href="https://wa.me/919952391001">WhatsApp: 9952391001</a><a href="https://instagram.com/_urban_tshirts">Instagram: @_urban_tshirts</a></div>
+    <div><h4>Store info</h4><span>Sizes: M • L • XL</span><span>Delivery: 3–4 days</span><span>Returns: damaged pieces only</span></div>
+    
+  </div>
+  <div class="footer-bottom">© 2026 URBAN T-SHIRTS. All rights reserved.</div>
+</footer>
+
+<div class="image-modal" id="imageModal" onclick="closeImageModal(event)"><button aria-label="Close image" onclick="closeImageModal(event)">×</button><img id="modalImage" src="" alt="Product preview"><div class="modal-label" id="modalLabel"></div></div>
+<div class="drawer-overlay" id="overlay" onclick="closeCart()"></div>
+<aside class="drawer" id="cartPanel">
+  <div class="drawer-head"><h2>Your bag</h2><button onclick="closeCart()">×</button></div>
+  <div id="cartItems"></div>
+  <div class="drawer-bottom"><div><span>Total</span><b id="cartTotal">₹0</b></div><button class="black-btn" onclick="checkout()">ORDER ON WHATSAPP →</button></div>
+</aside>
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>

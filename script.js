@@ -98,6 +98,22 @@ function checkout(){
  const total=cart.reduce((s,x)=>s+(Number(x.price)||0),0);const msg=`Hi URBAN T-SHIRTS! I want to order:\n${lines.join("\n")}\nTotal: ${money(total)}\nPlease confirm availability and delivery details.`;window.open("https://wa.me/917603871293?text="+encodeURIComponent(msg),"_blank","noopener");
 }
 
+async function loadCatalog(){
+  try{
+    const res=await fetch("products.json?v="+Date.now());
+    if(res.ok){
+      const data=await res.json();
+      if(Array.isArray(data)&&data.length){
+        const local=safeRead(PRODUCTS_KEY,null);
+        if(!local){
+          products=data;
+          render();
+        }
+      }
+    }
+  }catch(e){}
+}
+
 document.addEventListener("DOMContentLoaded",()=>{
  initTheme();
  $("#search")?.addEventListener("input",render);$("#sort")?.addEventListener("change",render);
@@ -107,5 +123,7 @@ document.addEventListener("DOMContentLoaded",()=>{
  $("#productGrid")?.addEventListener("click",e=>{const card=e.target.closest(".product");if(!card)return;const id=card.dataset.productId,p=products.find(x=>x.id===id);if(!p)return;const action=e.target.closest("[data-action]")?.dataset.action;if(e.target.classList.contains("size")){selectSize(e.target);return}if(action==="preview"){openImageModal(p.image,p.name);return}if(action==="wishlist"){toggleWishlist(id);return}if(action==="add"){addToCart(id);return}if(action==="combo"){toggleComboItem(id);return}});
  $("#cartItems")?.addEventListener("click",e=>{const b=e.target.closest("[data-remove]");if(b)removeItem(Number(b.dataset.remove))});
  document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCart();$("#imageModal")?.classList.remove("open");document.body.style.overflow=""}});
+ window.addEventListener("storage",e=>{if(e.key===PRODUCTS_KEY){products=safeRead(PRODUCTS_KEY,products);render()}});
  render();renderCart();
+ loadCatalog();
 });

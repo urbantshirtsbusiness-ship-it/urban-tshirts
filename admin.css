@@ -14,6 +14,28 @@
 .lock-card .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .login-error{color:#dc2626;font-size:12px;font-weight:600;margin:10px 0 0;text-align:center}
 .admin-footer{padding:24px;text-align:center}
-html[data-theme="dark"] .lock-card input[type="password"]{background:#161616;border-color:#333;color:#fff}
-html[data-theme="dark"] .lock-card input[type="password"]:focus{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.1)}
+.photo-field{margin:18px 0}
+.upload-dropzone{border:2px dashed #ccc;border-radius:12px;background:#fafafa;padding:20px;text-align:center;cursor:pointer;transition:all .2s ease;margin-top:6px}
+.upload-dropzone:hover{border-color:#111;background:#f3f3f3}
+.upload-prompt{display:flex;flex-direction:column;align-items:center;gap:6px}
+.upload-icon{font-size:28px}
+.upload-prompt b{font-size:12px;color:#111}
+.upload-prompt span{font-size:11px;color:#777}
+.upload-preview-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.upload-preview-wrap img{max-width:180px;max-height:220px;object-fit:cover;border-radius:8px;border:1px solid #ddd;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.preview-actions{display:flex;gap:8px}
+.preview-actions button{padding:6px 12px;font-size:10px;font-weight:700;border-radius:6px;cursor:pointer;border:1px solid #ddd;background:#fff}
+.preview-actions .change-photo-btn{background:#111;color:#fff;border-color:#111}
+.preview-actions .remove-photo-btn{color:#c62828;border-color:#e0b4b4}
+.url-label{margin-top:10px;font-size:10px;color:#888;font-weight:600}
+.url-label input{margin-top:4px}
+
+html[data-theme="dark"] .upload-dropzone{background:#151515;border-color:#333}
+html[data-theme="dark"] .upload-dropzone:hover{border-color:#666;background:#1a1a1a}
+html[data-theme="dark"] .upload-prompt b{color:#eee}
+html[data-theme="dark"] .upload-prompt span{color:#888}
+html[data-theme="dark"] .upload-preview-wrap img{border-color:#333}
+html[data-theme="dark"] .preview-actions button{background:#222;color:#eee;border-color:#444}
+html[data-theme="dark"] .preview-actions .change-photo-btn{background:#eee;color:#111;border-color:#eee}
+
 

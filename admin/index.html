@@ -15,23 +15,53 @@
   </div>
 </div>
 <div id="adminApp">
-<header><a href="index.html">← View Store</a><h1>URBAN T-SHIRTS <span>PRODUCT MANAGER</span></h1><button id="themeToggle" type="button">☾ Theme</button><button onclick="resetProducts()">Reset Demo Products</button></header>
+<header>
+  <a href="index.html">← View Store</a>
+  <h1>URBAN T-SHIRTS <span>PRODUCT MANAGER</span></h1>
+  <button type="button" onclick="exportProducts()">💾 Export Catalog JSON</button>
+  <button type="button" onclick="document.getElementById('importFile').click()">📂 Import Catalog</button>
+  <input type="file" id="importFile" accept=".json" style="display:none" onchange="importProducts(event)">
+  <button id="themeToggle" type="button">☾ Theme</button>
+  <button onclick="resetProducts()">Reset Demo</button>
+</header>
 <main>
 <section class="panel">
 <p class="kicker">VERSION 4 • PRIVATE ADMIN</p><h2>Add / edit collection</h2>
-<p class="help">This page is for managing the products shown on the store. Changes are saved in this browser using localStorage.</p>
+<p class="help">Upload tee photos directly from your phone/PC or use image links. Changes are saved instantly to your storefront.</p>
 <form id="form">
 <input type="hidden" id="id">
 <label>Product name<input id="name" required placeholder="e.g. Itachi Oversized Tee"></label>
 <div class="two"><label>Price (₹)<input id="price" type="number" min="0" value="199" required></label><label>Category<select id="category"><option>Anime</option><option>Graphic</option><option>Streetwear</option><option>Trendy</option></select></label></div>
-<label>Photo path<input id="image" required placeholder="assets/my-tshirt.jpg"></label>
+
+<div class="photo-field">
+  <label>Product Photo</label>
+  <div class="upload-dropzone" id="dropzone">
+    <input type="file" id="imageFileInput" accept="image/*" style="display:none">
+    <div id="uploadPrompt" class="upload-prompt" onclick="document.getElementById('imageFileInput').click()">
+      <div class="upload-icon">📷</div>
+      <b>Upload photo from device</b>
+      <span>Click to pick image from camera/gallery (auto-optimized)</span>
+    </div>
+    <div id="uploadPreviewWrap" class="upload-preview-wrap" hidden>
+      <img id="imagePreview" src="" alt="Product preview">
+      <div class="preview-actions">
+        <button type="button" class="change-photo-btn" onclick="changePhoto()">Change Photo</button>
+        <button type="button" class="remove-photo-btn" onclick="resetPhoto()">Remove</button>
+      </div>
+    </div>
+  </div>
+  <label class="url-label">Or image path / URL:
+    <input id="image" required placeholder="assets/my-tshirt.jpg or https://..." oninput="onImageUrlInput(this.value)">
+  </label>
+</div>
+
 <label>Sizes <input id="sizes" value="M,L,XL"></label>
 <label>Badge<select id="badge"><option value="">None</option><option>NEW</option><option>BESTSELLER</option><option>HOT</option><option>TRENDING</option><option>SALE</option></select></label>
 <div class="actions"><button class="primary" type="submit">Save product</button><button type="button" onclick="clearForm()">Clear</button></div>
 </form>
 </section>
 <section class="panel"><div class="list-head"><div><p class="kicker">YOUR COLLECTION</p><h2>Products</h2></div><input id="filter" placeholder="Search products…"></div><div id="list"></div></section>
-<section class="panel tip"><h3>How to update the website</h3><ol><li>Put a new product photo inside the <b>assets</b> folder.</li><li>Enter its path, for example <b>assets/new-tee.jpg</b>.</li><li>Add the product name, price, category and sizes, then click <b>Save product</b>.</li><li>Open <b>index.html</b> to see the updated collection.</li></ol><p><b>Important:</b> This version is a front-end store. The manager saves changes only in the browser/device where you edit it. For a real online shop where you can manage products from any phone, the next step is to connect a database/admin backend.</p></section>
+<section class="panel tip"><h3>How Product Updating Works</h3><ol><li>Click <b>Upload photo from device</b> to pick any picture from your phone or PC.</li><li>Fill in the product name, price (e.g. ₹199), category, and sizes.</li><li>Click <b>Save product</b> to immediately add or update it on the store!</li><li>Click <b>💾 Export Catalog JSON</b> anytime to download your updated <code>products.json</code> file for your GitHub repository.</li></ol></section>
 </main>
 <footer class="admin-footer"><button type="button" id="logoutBtn">Lock Product Manager</button></footer>
 </div>

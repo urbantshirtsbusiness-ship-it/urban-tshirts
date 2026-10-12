@@ -61,7 +61,30 @@
 </div>
 
 <label>Sizes <input id="sizes" value="M,L,XL"></label>
-<label>Badge<select id="badge"><option value="">None</option><option>NEW</option><option>BESTSELLER</option><option>HOT</option><option>TRENDING</option><option>SALE</option></select></label>
+<div class="two">
+  <label>Combo Offer (3-Piece)
+    <select id="comboTier">
+      <option value="">No Combo Offer</option>
+      <option value="399">3 for ₹399</option>
+      <option value="499">3 for ₹499</option>
+      <option value="599">3 for ₹599</option>
+      <option value="699">3 for ₹699</option>
+      <option value="799">3 for ₹799</option>
+      <option value="899">3 for ₹899</option>
+      <option value="999">3 for ₹999</option>
+    </select>
+  </label>
+  <label>Badge
+    <select id="badge">
+      <option value="">None</option>
+      <option>NEW</option>
+      <option>BESTSELLER</option>
+      <option>HOT</option>
+      <option>TRENDING</option>
+      <option>SALE</option>
+    </select>
+  </label>
+</div>
 <div class="actions"><button class="primary" type="submit">Save product</button><button type="button" onclick="clearForm()">Clear</button></div>
 </form>
 </section>

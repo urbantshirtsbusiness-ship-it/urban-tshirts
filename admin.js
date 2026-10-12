@@ -191,7 +191,7 @@ function render() {
       <img src="${p.image}" alt="${p.name}">
       <div>
         <h3>${p.name}</h3>
-        <p>${p.category} • ₹${p.price} • ${(p.sizes || []).join(", ")} ${p.badge ? "• " + p.badge : ""}</p>
+        <p>${p.category} • ₹${p.price} • ${(p.sizes || []).join(", ")} ${p.comboTier ? "• <b style='color:#e65100'>3 for ₹" + p.comboTier + " Combo</b>" : ""} ${p.badge ? "• " + p.badge : ""}</p>
       </div>
       <div class="buttons">
         <button type="button" onclick="editProduct('${p.id}')">Edit</button>
@@ -206,6 +206,7 @@ function clearForm() {
   if ($("#id")) $("#id").value = "";
   if ($("#price")) $("#price").value = 199;
   if ($("#sizes")) $("#sizes").value = "M,L,XL";
+  if ($("#comboTier")) $("#comboTier").value = "";
   resetPhoto();
 }
 
@@ -217,6 +218,7 @@ function editProduct(id) {
   $("#price").value = p.price;
   $("#category").value = p.category;
   $("#sizes").value = (p.sizes || []).join(",");
+  if ($("#comboTier")) $("#comboTier").value = p.comboTier || "";
   $("#badge").value = p.badge || "";
   setImageValue(p.image || "");
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -293,6 +295,7 @@ if (formEl) {
       category: $("#category")?.value || "Streetwear",
       image: imgVal,
       sizes: ($("#sizes")?.value || "M,L,XL").split(",").map(x => x.trim()).filter(Boolean),
+      comboTier: $("#comboTier")?.value || "",
       badge: $("#badge")?.value || ""
     };
     const i = products.findIndex(p => p.id === data.id);

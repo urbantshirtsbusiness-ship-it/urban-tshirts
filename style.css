@@ -35,3 +35,11 @@ html[data-theme="dark"] .drawer{background:#111;color:#fff}html[data-theme="dark
 html[data-theme="dark"] .cart-combo{border-color:#303030}html[data-theme="dark"] .cart-combo-head{border-color:#303030}
 html[data-theme="dark"] .image-modal{background:rgba(0,0,0,.94)}
 @media(max-width:700px){html[data-theme="dark"] .hero{background:#171513}}
+
+/* Dynamic Combo Filter Chips & Product Badges */
+.chip-combo{background:#fff3e0;border-color:#ff9800;color:#e65100;font-weight:700}
+.chip-combo:hover,.chip-combo.active{background:#e65100;color:#fff;border-color:#e65100}
+.combo-pill{position:absolute;bottom:10px;left:10px;background:#111;color:#fff;padding:4px 8px;font-size:9px;font-weight:800;letter-spacing:.5px;border-radius:4px;z-index:2;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+html[data-theme="dark"] .chip-combo{background:#2e1b09;border-color:#fb8c00;color:#ffb74d}
+html[data-theme="dark"] .chip-combo:hover,html[data-theme="dark"] .chip-combo.active{background:#fb8c00;color:#111;border-color:#fb8c00}
+html[data-theme="dark"] .combo-pill{background:#fff;color:#111}

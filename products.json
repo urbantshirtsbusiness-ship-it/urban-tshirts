@@ -10,7 +10,8 @@
       "L",
       "XL"
     ],
-    "badge": "NEW"
+    "badge": "NEW",
+    "comboTier": "499"
   },
   {
     "id": "p1791818450951",
@@ -23,7 +24,8 @@
       "L",
       "XL"
     ],
-    "badge": "NEW"
+    "badge": "NEW",
+    "comboTier": "499"
   },
   {
     "id": "p1791818405107",
@@ -36,7 +38,8 @@
       "L",
       "XL"
     ],
-    "badge": "NEW"
+    "badge": "NEW",
+    "comboTier": "499"
   },
   {
     "id": "p1791818366622",
@@ -49,7 +52,8 @@
       "L",
       "XL"
     ],
-    "badge": "NEW"
+    "badge": "NEW",
+    "comboTier": "499"
   },
   {
     "id": "p1791818332002",
@@ -62,7 +66,8 @@
       "L",
       "XL"
     ],
-    "badge": "NEW"
+    "badge": "NEW",
+    "comboTier": "499"
   },
   {
     "id": "p1791818296050",
@@ -75,7 +80,8 @@
       "L",
       "XL"
     ],
-    "badge": "NEW"
+    "badge": "NEW",
+    "comboTier": "499"
   },
   {
     "id": "p1791818242193",
@@ -88,7 +94,8 @@
       "L",
       "XL"
     ],
-    "badge": "NEW"
+    "badge": "NEW",
+    "comboTier": "499"
   },
   {
     "id": "p1791818192084",
@@ -101,7 +108,8 @@
       "L",
       "XL"
     ],
-    "badge": "NEW"
+    "badge": "NEW",
+    "comboTier": "499"
   },
   {
     "id": "p1791816152737",
@@ -115,7 +123,8 @@
       "XL",
       "XXL"
     ],
-    "badge": "BESTSELLER"
+    "badge": "BESTSELLER",
+    "comboTier": "499"
   },
   {
     "id": "p1791792488445",
@@ -184,7 +193,8 @@
       "L",
       "XL"
     ],
-    "badge": "NEW"
+    "badge": "NEW",
+    "comboTier": "499"
   },
   {
     "id": "p2",
@@ -197,7 +207,8 @@
       "L",
       "XL"
     ],
-    "badge": "BESTSELLER"
+    "badge": "BESTSELLER",
+    "comboTier": "499"
   },
   {
     "id": "p3",
@@ -210,7 +221,8 @@
       "L",
       "XL"
     ],
-    "badge": "NEW"
+    "badge": "NEW",
+    "comboTier": "499"
   },
   {
     "id": "p4",
@@ -223,7 +235,8 @@
       "L",
       "XL"
     ],
-    "badge": "TRENDING"
+    "badge": "TRENDING",
+    "comboTier": "499"
   },
   {
     "id": "p5",
@@ -236,7 +249,8 @@
       "L",
       "XL"
     ],
-    "badge": ""
+    "badge": "",
+    "comboTier": "499"
   },
   {
     "id": "p6",
@@ -249,7 +263,8 @@
       "L",
       "XL"
     ],
-    "badge": "HOT"
+    "badge": "HOT",
+    "comboTier": "499"
   },
   {
     "id": "p7",
@@ -262,7 +277,8 @@
       "L",
       "XL"
     ],
-    "badge": ""
+    "badge": "",
+    "comboTier": "499"
   },
   {
     "id": "p8",
@@ -275,7 +291,8 @@
       "L",
       "XL"
     ],
-    "badge": "NEW"
+    "badge": "NEW",
+    "comboTier": "499"
   },
   {
     "id": "p9",
@@ -288,6 +305,7 @@
       "L",
       "XL"
     ],
-    "badge": ""
+    "badge": "",
+    "comboTier": "499"
   }
 ]

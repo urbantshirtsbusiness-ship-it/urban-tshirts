@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>URBAN T-SHIRTS — Product Manager</title><link rel="stylesheet" href="admin.css"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="/"><title>URBAN T-SHIRTS — Product Manager</title><link rel="icon" href="assets/logo.png"><link rel="stylesheet" href="admin.css"></head>
 <body>
 <div id="adminLock" class="admin-lock">
   <div class="lock-card">
     <img src="assets/logo.png" alt="URBAN T-SHIRTS" class="lock-logo">
     <p class="kicker">PRIVATE ACCESS</p>
-    <h2>Product Manager</h2>
-    <p class="help">This area is restricted to the store owner.</p>
-    <form id="adminLoginForm">
-      <label>Admin password<input id="adminPassword" type="password" autocomplete="current-password" required autofocus></label>
-      <button class="primary" type="submit">Unlock Product Manager</button>
+    <h2>Admin Panel</h2>
+    <p class="help">Enter password to automatically unlock</p>
+    <form id="adminLoginForm" onsubmit="return false;">
+      <label for="adminPassword" class="sr-only">Password</label>
+      <input id="adminPassword" type="password" placeholder="Enter password…" autocomplete="off" autofocus>
       <p id="loginError" class="login-error" hidden>Incorrect password. Try again.</p>
     </form>
   </div>

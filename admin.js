@@ -1,15 +1,74 @@
 
-// Private Product Manager access gate (client-side protection for this static site).
+// Private Product Manager access gate with auto-login on typing ADMIN123 (no button required)
 (function(){
-  const HASH="81a754c4110038f8a98bb39177471d6998ce93a8ccf2ab4a1b69b77c15472820";
-  const SESSION_KEY="urban_admin_unlocked_v4";
-  const lock=document.getElementById("adminLock"), app=document.getElementById("adminApp"), form=document.getElementById("adminLoginForm"), input=document.getElementById("adminPassword"), err=document.getElementById("loginError"), logout=document.getElementById("logoutBtn");
-  async function digest(text){ const data=new TextEncoder().encode(text); const hash=await crypto.subtle.digest("SHA-256",data); return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,"0")).join(""); }
-  function setUnlocked(v){ if(v){sessionStorage.setItem(SESSION_KEY,"1");lock.hidden=true;app.hidden=false;}else{sessionStorage.removeItem(SESSION_KEY);lock.hidden=false;app.hidden=true;} }
-  setUnlocked(sessionStorage.getItem(SESSION_KEY)==="1");
-  form.addEventListener("submit",async e=>{e.preventDefault(); const ok=(await digest(input.value))===HASH; if(ok){err.hidden=true;input.value="";setUnlocked(true);}else{err.hidden=false;input.select();}});
-  logout.addEventListener("click",()=>{setUnlocked(false); input.focus();});
+  const PASSWORD = "ADMIN123";
+  const SESSION_KEY = "urban_admin_unlocked_v4";
+  const lock = document.getElementById("adminLock");
+  const app = document.getElementById("adminApp");
+  const input = document.getElementById("adminPassword");
+  const err = document.getElementById("loginError");
+  const logout = document.getElementById("logoutBtn");
+
+  function setUnlocked(v) {
+    if (v) {
+      sessionStorage.setItem(SESSION_KEY, "1");
+      if (lock) lock.hidden = true;
+      if (app) app.hidden = false;
+    } else {
+      sessionStorage.removeItem(SESSION_KEY);
+      if (lock) lock.hidden = false;
+      if (app) app.hidden = true;
+    }
+  }
+
+  // Restore existing session
+  setUnlocked(sessionStorage.getItem(SESSION_KEY) === "1");
+
+  function verify() {
+    if (!input) return;
+    const val = input.value.trim();
+    if (val === PASSWORD || val.toUpperCase() === PASSWORD) {
+      if (err) err.hidden = true;
+      input.value = "";
+      setUnlocked(true);
+    }
+  }
+
+  if (input) {
+    input.addEventListener("input", () => {
+      if (err) err.hidden = true;
+      verify();
+    });
+    input.addEventListener("paste", () => {
+      setTimeout(verify, 20);
+    });
+    input.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const val = input.value.trim();
+        if (val === PASSWORD || val.toUpperCase() === PASSWORD) {
+          if (err) err.hidden = true;
+          input.value = "";
+          setUnlocked(true);
+        } else if (val) {
+          if (err) err.hidden = false;
+          input.select();
+        }
+      }
+    });
+  }
+
+  if (logout) {
+    logout.addEventListener("click", () => {
+      setUnlocked(false);
+      if (input) {
+        input.value = "";
+        setTimeout(() => input.focus(), 50);
+      }
+    });
+  }
 })();
+
 const DEMO_PRODUCTS=[{"id": "p1", "name": "Goku Power Graphic Tee", "price": 199, "category": "Anime", "image": "assets/goku.jpg", "sizes": ["M", "L", "XL"], "badge": "NEW"}, {"id": "p2", "name": "VIKAS Street Tee", "price": 199, "category": "Streetwear", "image": "assets/vibes-blue.jpg", "sizes": ["M", "L", "XL"], "badge": "BESTSELLER"}, {"id": "p3", "name": "Naruto x Itachi Graphic Tee", "price": 199, "category": "Anime", "image": "assets/naruto-itachi.jpg", "sizes": ["M", "L", "XL"], "badge": "NEW"}, {"id": "p4", "name": "Fire Fighter Graphic Tee", "price": 199, "category": "Graphic", "image": "assets/fire-fighter.jpg", "sizes": ["M", "L", "XL"], "badge": "TRENDING"}, {"id": "p5", "name": "Itachi Cream Oversized Tee", "price": 199, "category": "Anime", "image": "assets/itachi-cream.jpg", "sizes": ["M", "L", "XL"], "badge": ""}, {"id": "p6", "name": "VIKAS Red Street Tee", "price": 199, "category": "Streetwear", "image": "assets/vibes-red.jpg", "sizes": ["M", "L", "XL"], "badge": "HOT"}, {"id": "p7", "name": "Itachi Akatsuki Tee", "price": 199, "category": "Anime", "image": "assets/itachi-green.jpg", "sizes": ["M", "L", "XL"], "badge": ""}, {"id": "p8", "name": "Akaza Graphic Tee", "price": 199, "category": "Anime", "image": "assets/akaza.jpg", "sizes": ["M", "L", "XL"], "badge": "NEW"}, {"id": "p9", "name": "ONESELF Graphic Tee", "price": 199, "category": "Graphic", "image": "assets/oneself.jpg", "sizes": ["M", "L", "XL"], "badge": ""}];
 
 let products=JSON.parse(localStorage.getItem("urban_products_v4")||"null")||DEMO_PRODUCTS;

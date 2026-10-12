@@ -5,6 +5,15 @@
 .admin-lock{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:20px;background:var(--bg,#f5f5f5)}
 .admin-lock[hidden]{display:none}
 #adminApp[hidden]{display:none}
-.lock-card{width:min(420px,100%);padding:32px;border-radius:24px;background:var(--panel,#fff);box-shadow:0 20px 60px rgba(0,0,0,.14);border:1px solid rgba(127,127,127,.18)}
-.lock-logo{display:block;width:72px;height:72px;object-fit:contain;margin:0 auto 18px}
-.lock-card h2{text-align:center;margin:0 0 8px}.lock-card .help{text-align:center}.login-error{color:#c62828;font-weight:700;margin-top:12px}.admin-footer{padding:24px;text-align:center}
+.lock-card{width:min(400px,100%);padding:40px 32px;border-radius:24px;background:var(--panel,#fff);box-shadow:0 25px 70px rgba(0,0,0,.12);border:1px solid rgba(127,127,127,.18);text-align:center}
+.lock-logo{display:block;width:76px;height:76px;object-fit:contain;margin:0 auto 16px}
+.lock-card h2{text-align:center;margin:0 0 8px;font-size:24px}
+.lock-card .help{text-align:center;margin-bottom:18px;color:#777;font-size:12px}
+.lock-card input[type="password"]{display:block;width:100%;padding:14px 16px;font-size:15px;border-radius:12px;border:1.5px solid #d4d4d4;background:#fafafa;text-align:center;letter-spacing:3px;margin:12px 0 0;transition:all .2s ease;outline:none;box-sizing:border-box}
+.lock-card input[type="password"]:focus{border-color:#111;background:#fff;box-shadow:0 0 0 3px rgba(0,0,0,.08)}
+.lock-card .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.login-error{color:#dc2626;font-size:12px;font-weight:600;margin:10px 0 0;text-align:center}
+.admin-footer{padding:24px;text-align:center}
+html[data-theme="dark"] .lock-card input[type="password"]{background:#161616;border-color:#333;color:#fff}
+html[data-theme="dark"] .lock-card input[type="password"]:focus{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.1)}
+

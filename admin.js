@@ -301,8 +301,8 @@ if (formEl) {
     save();
     render();
     clearForm();
-    setSyncAlert("● Product saved! Click <b>\"🚀 Publish Live to All Devices\"</b> to push this update to GitHub and Vercel.", "");
-    alert("✓ Product saved! Don't forget to click '🚀 Publish Live to All Devices' so it shows on all phones and computers.");
+    setSyncAlert("● Product saved! Click <b>\"Publish Live to All Devices\"</b> to push this update to GitHub and Vercel.", "");
+    alert("✓ Product saved! Don't forget to click 'Publish Live to All Devices' so it shows on all phones and computers.");
   });
 }
 
@@ -346,7 +346,7 @@ function saveGitHubToken() {
   }
   localStorage.setItem(GITHUB_TOKEN_KEY, val);
   closeGitHubSettings();
-  setSyncAlert("✓ GitHub Token saved in your browser! You can now click <b>🚀 Publish Live to All Devices</b>.", "success");
+  setSyncAlert("✓ GitHub Token saved in your browser! You can now click <b>Publish Live to All Devices</b>.", "success");
 }
 
 function clearGitHubToken() {

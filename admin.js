@@ -301,13 +301,157 @@ if (formEl) {
     save();
     render();
     clearForm();
-    alert("✓ Product saved successfully! Check the storefront to see it live.");
+    setSyncAlert("● Product saved! Click <b>\"🚀 Publish Live to All Devices\"</b> to push this update to GitHub and Vercel.", "");
+    alert("✓ Product saved! Don't forget to click '🚀 Publish Live to All Devices' so it shows on all phones and computers.");
   });
 }
 
 const filterEl = $("#filter");
 if (filterEl) filterEl.addEventListener("input", render);
 render();
+
+// GitHub Publishing & Sync
+const GITHUB_TOKEN_KEY = "urban_github_token_v4";
+const GITHUB_REPO = "urbantshirtsbusiness-ship-it/urban-tshirts";
+
+function setSyncAlert(msg, type) {
+  const alertEl = $("#syncAlert");
+  const textEl = $("#syncAlertText");
+  if (!alertEl || !textEl) return;
+  alertEl.className = "sync-alert " + (type || "");
+  textEl.innerHTML = msg;
+}
+
+function openGitHubSettings() {
+  const modal = $("#tokenModal");
+  const input = $("#ghTokenInput");
+  if (modal) modal.hidden = false;
+  if (input) {
+    input.value = localStorage.getItem(GITHUB_TOKEN_KEY) || "";
+    input.focus();
+  }
+}
+
+function closeGitHubSettings() {
+  const modal = $("#tokenModal");
+  if (modal) modal.hidden = true;
+}
+
+function saveGitHubToken() {
+  const input = $("#ghTokenInput");
+  const val = (input?.value || "").trim();
+  if (!val) {
+    alert("Please enter a valid GitHub token (ghp_...).");
+    return;
+  }
+  localStorage.setItem(GITHUB_TOKEN_KEY, val);
+  closeGitHubSettings();
+  setSyncAlert("✓ GitHub Token saved in your browser! You can now click <b>🚀 Publish Live to All Devices</b>.", "success");
+}
+
+function clearGitHubToken() {
+  if (confirm("Remove saved GitHub token from this browser?")) {
+    localStorage.removeItem(GITHUB_TOKEN_KEY);
+    closeGitHubSettings();
+    setSyncAlert("GitHub token removed from this browser.", "");
+  }
+}
+
+async function publishLive() {
+  const btn = $("#publishBtn");
+  if (!btn) return;
+  const originalText = btn.textContent;
+  btn.textContent = "⏳ Publishing to GitHub...";
+  btn.classList.add("syncing");
+  setSyncAlert("⏳ Publishing updated catalog to GitHub & Vercel...", "");
+
+  try {
+    // 1. Try Vercel Serverless Function first (/api/sync)
+    let apiRes;
+    try {
+      apiRes = await fetch("/api/sync", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: "ADMIN123", products })
+      });
+    } catch (e) {
+      // Local dev or static host without backend
+      apiRes = null;
+    }
+
+    if (apiRes && apiRes.ok) {
+      btn.textContent = "✓ Published!";
+      btn.classList.remove("syncing");
+      btn.classList.add("success");
+      setSyncAlert("✓ <b>Successfully published to GitHub!</b> Vercel is updating your live store (~15-20 seconds on all devices).", "success");
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.classList.remove("success");
+      }, 5000);
+      return;
+    }
+
+    // 2. Direct commit via GitHub API using saved token
+    const savedToken = localStorage.getItem(GITHUB_TOKEN_KEY);
+    if (!savedToken) {
+      btn.textContent = originalText;
+      btn.classList.remove("syncing");
+      setSyncAlert("⚠️ To publish automatically, enter your GitHub Key once. Click <b>⚙️ GitHub Key</b> to configure.", "error");
+      openGitHubSettings();
+      return;
+    }
+
+    btn.textContent = "⏳ Committing to GitHub...";
+    const getRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/products.json`, {
+      headers: {
+        Authorization: `Bearer ${savedToken}`,
+        Accept: "application/vnd.github+json"
+      }
+    });
+
+    let sha = undefined;
+    if (getRes.ok) {
+      const existing = await getRes.json();
+      sha = existing.sha;
+    }
+
+    const jsonStr = JSON.stringify(products, null, 2);
+    const base64Content = btoa(unescape(encodeURIComponent(jsonStr)));
+
+    const putRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/products.json`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${savedToken}`,
+        Accept: "application/vnd.github+json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: `Update catalog (${products.length} products) from Admin Panel`,
+        content: base64Content,
+        sha: sha
+      })
+    });
+
+    if (putRes.ok) {
+      btn.textContent = "✓ Published!";
+      btn.classList.remove("syncing");
+      btn.classList.add("success");
+      setSyncAlert("✓ <b>Successfully published to GitHub!</b> Vercel is updating your live store on all phones & devices (~15-20s).", "success");
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.classList.remove("success");
+      }, 5000);
+    } else {
+      const putErr = await putRes.json().catch(() => ({}));
+      throw new Error(putErr.message || "GitHub API status " + putRes.status);
+    }
+  } catch (err) {
+    btn.textContent = originalText;
+    btn.classList.remove("syncing");
+    setSyncAlert("❌ Publish failed: " + err.message + ". You can also use <b>💾 Export JSON</b> to download your catalog.", "error");
+    alert("Publish failed: " + err.message);
+  }
+}
 
 // Theme toggle
 (function(){

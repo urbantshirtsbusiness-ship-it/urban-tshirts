@@ -104,11 +104,9 @@ async function loadCatalog(){
     if(res.ok){
       const data=await res.json();
       if(Array.isArray(data)&&data.length){
-        const local=safeRead(PRODUCTS_KEY,null);
-        if(!local){
-          products=data;
-          render();
-        }
+        products=data;
+        try{ localStorage.setItem(PRODUCTS_KEY, JSON.stringify(data)); }catch(e){}
+        render();
       }
     }
   }catch(e){}

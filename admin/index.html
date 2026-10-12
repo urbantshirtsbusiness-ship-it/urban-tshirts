@@ -18,16 +18,21 @@
 <header>
   <a href="index.html">← View Store</a>
   <h1>URBAN T-SHIRTS <span>PRODUCT MANAGER</span></h1>
-  <button type="button" onclick="exportProducts()">💾 Export Catalog JSON</button>
-  <button type="button" onclick="document.getElementById('importFile').click()">📂 Import Catalog</button>
+  <button type="button" id="publishBtn" class="publish-btn" onclick="publishLive()">🚀 Publish Live to All Devices</button>
+  <button type="button" onclick="openGitHubSettings()">⚙️ GitHub Key</button>
+  <button type="button" onclick="exportProducts()">💾 Export JSON</button>
+  <button type="button" onclick="document.getElementById('importFile').click()">📂 Import</button>
   <input type="file" id="importFile" accept=".json" style="display:none" onchange="importProducts(event)">
   <button id="themeToggle" type="button">☾ Theme</button>
-  <button onclick="resetProducts()">Reset Demo</button>
+  <button onclick="resetProducts()">Reset</button>
 </header>
+<div id="syncAlert" class="sync-alert">
+  <span id="syncAlertText">💡 When you add or edit products, click <b>"🚀 Publish Live to All Devices"</b> to push them to GitHub & Vercel so they appear on all phones!</span>
+</div>
 <main>
 <section class="panel">
 <p class="kicker">VERSION 4 • PRIVATE ADMIN</p><h2>Add / edit collection</h2>
-<p class="help">Upload tee photos directly from your phone/PC or use image links. Changes are saved instantly to your storefront.</p>
+<p class="help">Upload tee photos directly from your phone/PC or use image links. Then click <b>Publish Live</b> to update all devices.</p>
 <form id="form">
 <input type="hidden" id="id">
 <label>Product name<input id="name" required placeholder="e.g. Itachi Oversized Tee"></label>
@@ -65,5 +70,22 @@
 </main>
 <footer class="admin-footer"><button type="button" id="logoutBtn">Lock Product Manager</button></footer>
 </div>
+
+<div id="tokenModal" class="token-modal" hidden>
+  <div class="modal-card">
+    <h3>⚙️ GitHub Sync Key</h3>
+    <p>Enter your GitHub Personal Access Token once so clicking <b>"🚀 Publish Live"</b> commits directly to your GitHub repo from any browser!</p>
+    <label>GitHub Personal Access Token (classic with <code>repo</code> scope)
+      <input type="password" id="ghTokenInput" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off">
+    </label>
+    <div class="modal-actions">
+      <button type="button" class="primary" onclick="saveGitHubToken()">Save Key</button>
+      <button type="button" onclick="closeGitHubSettings()">Cancel</button>
+      <button type="button" class="remove-token-btn" onclick="clearGitHubToken()">Clear Key</button>
+    </div>
+    <small>Stored safely in your private browser storage. Never exposed publicly.</small>
+  </div>
+</div>
+
 <script src="admin.js"></script>
 </body></html>
